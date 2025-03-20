@@ -1,0 +1,20 @@
+@model IEnumerable<Schedule>
+
+    <div id="calendar">
+        @foreach (var day in Enum.GetValues(typeof(DayOfWeek)))
+        {
+            <div class="day">
+                <h3>@day</h3>
+                @foreach (var schedule in Model.Where(s => s.Day == (DayOfWeek)day))
+                {
+                    <div class="task">
+                        <p>@schedule.Task.Description</p>
+                        <p>@schedule.Employee.Name</p>
+                        <p>@schedule.Shift.Name</p>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <button onclick="location.href='@Url.Action("Create", "Schedule")'">Schedule New Task</button>

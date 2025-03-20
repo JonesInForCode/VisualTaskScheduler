@@ -1,0 +1,26 @@
+@model Schedule
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="EmployeeId"></label>
+        <select asp-for="EmployeeId" asp-items="ViewBag.Employees"></select>
+    </div>
+    <div>
+        <label asp-for="TaskId"></label>
+        <select asp-for="TaskId" asp-items="ViewBag.Tasks"></select>
+    </div>
+    <div>
+        <label asp-for="ShiftId"></label>
+        <select asp-for="ShiftId" asp-items="ViewBag.Shifts"></select>
+    </div>
+    <div>
+        <label asp-for="Day"></label>
+        <select asp-for="Day">
+            @foreach (var day in Enum.GetValues(typeof(DayOfWeek)))
+            {
+                <option value="@day">@day</option>
+            }
+        </select>
+    </div>
+    <button type="submit">Schedule Task</button>
+</form>
