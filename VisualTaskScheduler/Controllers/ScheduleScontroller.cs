@@ -1,40 +1,47 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using VisualTaskScheduler.Data;
 
-public class ScheduleController : Controller
+namespace VisualTaskScheduler.Controllers
 {
-    private readonly ApplicationDbContext _context;
-
-    public ScheduleController(ApplicationDbContext context)
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ScheduleController : Controller
     {
-        _context = context;
-    }
+        private readonly ApplicationDbContext _context;
 
-    // GET: Schedule
-    public async Task<IActionResult> Index()
-    {
-        var schedules = await _context.schedules
-            .Include(s => s.Employee)
-            .Include(s => s.Task)
-            .Include(s => s.Shift)
-            .ToListAsync();
-        return View(schedules);
-    }
-
-    public IActionResult Create()
-    {
-        //Logic to display the form for creating a new task
-        return View();
-    }
-
-    [HttpPost]
-    public async Task<IActionResult> Create(Schedule schedule)
-    {
-        if (ModelState.IsValid)
+        public ScheduleController(ApplicationDbContext context)
         {
-            _context.Add(schedule);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            _context = context;
         }
-        return View(schedule);
+
+        public async Task<IActionResult> Index()
+        {
+            var schedules = await _context.Schedules
+                .Include(s => s.Employee)
+                .Include(s => s.Task)
+                .Include(s => s.Shift)
+                .ToListAsync();
+            return View(schedules);
+        }
+
+        public IActionResult Create()
+        {
+            // Logic to display the form for creating a new task
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(Schedule schedule)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(schedule);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(schedule);
+        }
     }
 }
