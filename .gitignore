@@ -52,3 +52,66 @@ CodeCoverage/
 *.VisualState.xml
 TestResult.xml
 nunit-*.xml
+
+# Visual Studio
+.vscode/
+.vscode/*
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+bin/
+obj/
+out/
+*.log
+*.cache
+*.pdb
+*.mdb
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+
+# Configuration files
+appsettings.json
+appsettings.*.json
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Build artifacts
+dist/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Coverage reports
+coverage/
+*.coverage
+*.coveragexml
+
+# Generated files
+Generated/
